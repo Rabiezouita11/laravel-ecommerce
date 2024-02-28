@@ -15,9 +15,7 @@
 
 
 
-Route::get('/admin2', function () {
-    return view('admin2');
-})->name ('admin2');
+
 Route::get('/jeux', function () {
     return view('jeux');
 })->name ('jeux');

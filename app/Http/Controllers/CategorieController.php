@@ -13,9 +13,9 @@ class CategorieController extends Controller
     public function index() {
 
         $produits = Produit::orderBy('nomproduit')->paginate(9);
-        $categories = Categorie::all();
+        $categories = categorie::all();
 
-return view('index')->with('categories',$categories)->with('produits',$produits);
+      return view('index')->with('categories',$categories)->with('produits',$produits);
 
 
 
@@ -27,7 +27,7 @@ return view('index')->with('categories',$categories)->with('produits',$produits)
 
         }
 public function about(){
-    $categories = Categorie::all();
+    $categories = categorie::all();
 return view('about')->with('categories',$categories);
 
 }
@@ -36,7 +36,7 @@ return view('about')->with('categories',$categories);
 
         public function affiche($id){
 
-            $categories = Categorie::all();
+            $categories = categorie::all();
 
             return view('computeracc')->with('cat', categorie::find($id))->with('categories',$categories);
 
@@ -49,7 +49,7 @@ return view('about')->with('categories',$categories);
 
     public function AfficheCategorie()
     {
-    $categories=\App\Categorie::all();
+    $categories=\App\categorie::all();
     return view('categorie.AfficheCategorie',compact('categories'));
     }
 
@@ -66,12 +66,12 @@ public function AjoutCategorie(Request $request)
             ]);
 
 
-            $categories = new \App\Categorie();
+            $categories = new \App\categorie();
 	 	 	$categories->nom=$request['nom'];
 
 	 	 	$categories->save();
 
-	 	 	$categories=\App\Categorie::all();
+	 	 	$categories=\App\categorie::all();
               return redirect()->route('AfficheCategorie',compact('categories'))->with('success','la categorie a bien été ajouté');
             }
 
@@ -83,7 +83,7 @@ public function AjoutCategorie(Request $request)
          {
 
               $id=$request['id'];
-              $categories=\App\Categorie::find($id);
+              $categories=\App\categorie::find($id);
               return view('categorie.AfficheEditCategorie',compact('categories'));
          }
 
@@ -91,7 +91,7 @@ public function AjoutCategorie(Request $request)
          {
              
               $id=$request['id'];
-              $categories=\App\Categorie::find($id);
+              $categories=\App\categorie::find($id);
               $categories->nom=$request['nom'];
 
 
@@ -107,18 +107,18 @@ public function AjoutCategorie(Request $request)
     public function AfficheDeleteCategorie(Request $request)
     {
          $id=$request['id'];
-         $categories=\App\Categorie::find($id);
+         $categories=\App\categorie::find($id);
          return view('categorie.AfficheDeleteCategorie',compact('categories'));
     }
 
     public function DeleteCategorie(Request $request)
     {
          $id=$request['id'];
-         $categories=\App\Categorie::find($id);
+         $categories=\App\categorie::find($id);
 
          $categories->delete();
 
-         $categories=\App\Categorie::all();
+         $categories=\App\categorie::all();
          return redirect()->route('AfficheCategorie',compact('categories'))->with('xxx','la categorie a bien été supprimer');
     }
 
